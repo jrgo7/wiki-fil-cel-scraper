@@ -1,0 +1,1 @@
+# Wikipedia Filipino Celebrity Scraper
