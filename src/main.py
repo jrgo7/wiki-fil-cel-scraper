@@ -11,7 +11,7 @@ coloredlogs.install(level="INFO")
 
 def main():
     os.makedirs("output", exist_ok=True)
-    scrape()
+    # scrape()
     transform("output/actors.csv")
 
 
@@ -27,7 +27,10 @@ def transform(actors_df_path):
     logging.info("Transforming Wikipedia")
     actors_df = Transformer.transform(actors_df)
     actors_df.to_csv("output/actors_cleaned.csv", index=False)
-
+    actors_df = Transformer.clean_timestamps("output/actors_with_timestamp_birthdate.csv")
+    actors_df.to_csv("output/actors_really_cleaned.csv", index=False)
+    actors_df = Transformer.engineer_features("output/actors_really_cleaned.csv")
+    actors_df.to_csv("output/actors_engineered.csv", index=False)
 
 if __name__ == "__main__":
     main()
